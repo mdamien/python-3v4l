@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>python-3v4l</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
+  </head>
+  <body>
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a href="/" class="navbar-brand">python-3v4l 
+            <small>run code in 200+ Python versions simultaneously</small>
+        </a>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm-12">
+            <br>
+            {% block content %}{% endblock %}
+        </div>
+      </div>
+
+      <footer id="footer">
+        <div class="row">
+          <div class="col-sm-12">
+            <hr>
+            <p>Made by @dam_io</p>
+          </div>
+        </div>
+
+      </footer>
+
+
+    </div>
+
+  </body>
+</html>

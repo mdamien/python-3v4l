@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<pre>{{object.code}}</pre>
+{% for job in object.job_set.all %}
+<pre>{{ job.python_version }}: {{ job.output }}</pre>
+{% endfor %}
+
+{% endblock %}

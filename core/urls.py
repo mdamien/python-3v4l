@@ -19,4 +19,5 @@ from core import views
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
+    path('<int:pk>/', views.RunView.as_view(), name='run'),
 ]

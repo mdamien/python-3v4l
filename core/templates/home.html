@@ -1,50 +1,13 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>python-3v4l</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
-  </head>
-  <body>
-    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container">
-        <a href="" class="navbar-brand">python-3v4l 
-            <small>run code in 200+ Python versions simultaneously</small>
-        </a>
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+      <div class="form-group">
+        <textarea class="form-control" placeholder="paste code here" name="code" rows="3">print('hello_world')</textarea>
       </div>
-    </div>
-
-    <div class="container">
-
-      <div class="row">
-        <div class="col-sm-12">
-            <br>
-            <form method="post">
-                {% csrf_token %}
-                <fieldset>
-                  <div class="form-group">
-                    <textarea class="form-control" placeholder="paste code here" name="code" rows="3"></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Run</button>
-                </fieldset>
-            </form>
-        </div>
-      </div>
-
-      <footer id="footer">
-        <div class="row">
-          <div class="col-sm-12">
-            <hr>
-            <p>Made by @dam_io</p>
-          </div>
-        </div>
-
-      </footer>
-
-
-    </div>
-
-  </body>
-</html>
+      <button type="submit" class="btn btn-primary">Run</button>
+    </fieldset>
+</form>
+{% endblock %}
