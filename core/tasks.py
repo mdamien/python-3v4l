@@ -8,12 +8,11 @@ from .models import Job, Run
 
 versions = [
     ('python:3.4-alpine',),
-    ('python:3.4-alpine',),
     ('python:3.5-alpine',),
     ('python:3.6-alpine',),
     ('python:3.7-alpine',),
     ('python:3.8-alpine',),
-    ('python:rc-alpine',),
+    ('python:3.9-rc-alpine',),
     ('pypy:3-slim', 'pypy3'),
     ('pypy:2-slim', 'pypy'),
 ]
