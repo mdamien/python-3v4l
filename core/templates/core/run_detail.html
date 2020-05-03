@@ -6,19 +6,30 @@
     <textarea id="code-editor" class="form-control" placeholder="paste code here" name="code" rows="3">{{object.code}}</textarea>
 </div>
 
-{% for job in object.job_set.all %}
+{% if not finished %}
+<p>
+    <div class="d-flex align-items-center">
+      <div class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></div>
+      &nbsp;
+      <strong>{{ n_finished }} / {{ n_jobs }} finished </strong>
+    </div>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuemax="100"></div>
+    </div>
+</p>
+{% endif %}
 
-    {% if job.finished %}
-
-        <div class="card border-secondary mb-3">
-          <div class="card-header">{{ job.python_version }}</div>
-          <div class="card-body">
-            <p class="card-text"><pre>{{ job.output }}</pre></p>
-          </div>
+{% for group in outputs %}
+    <div class="card border-secondary mb-3">
+        <div class="card-header">
+        {% for job in group.jobs %}
+            {{ job.python_version }}&nbsp;
+        {% endfor %}
         </div>
-
-    {% endif %}
-
+        <div class="card-body">
+            <p class="card-text"><pre>{{ group.output }}</pre></p>
+        </div>
+    </div>
 {% endfor %}
 
 {% endblock %}
