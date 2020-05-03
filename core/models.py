@@ -11,4 +11,5 @@ class Run(models.Model):
 class Job(models.Model):
     run = models.ForeignKey(Run, on_delete=models.CASCADE)
     python_version = models.CharField(max_length=255)
-    output = models.TextField()
+    output = models.TextField(default='')
+    finished = models.BooleanField(default=False)

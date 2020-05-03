@@ -27,7 +27,6 @@ def do_a_job(run_pk, python_version, executable='python'):
     job = Job.objects.create(
         run=run,
         python_version=python_version,
-        output=''
     )
 
     os.mkdir(f'jobs/{job.pk}')
@@ -41,4 +40,5 @@ def do_a_job(run_pk, python_version, executable='python'):
     print('output', output)
 
     job.output = output
+    job.finished = True
     job.save()

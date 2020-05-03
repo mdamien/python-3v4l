@@ -1,9 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<pre>{{object.code}}</pre>
+
+<div class="form-group">
+    <textarea id="code-editor" class="form-control" placeholder="paste code here" name="code" rows="3">{{object.code}}</textarea>
+</div>
+
 {% for job in object.job_set.all %}
-<pre>{{ job.python_version }}: {{ job.output }}</pre>
+
+    {% if job.finished %}
+
+        <div class="card border-secondary mb-3">
+          <div class="card-header">{{ job.python_version }}</div>
+          <div class="card-body">
+            <p class="card-text"><pre>{{ job.output }}</pre></p>
+          </div>
+        </div>
+
+    {% endif %}
+
 {% endfor %}
 
+{% endblock %}
+
+
+{% block style %}
+<style type="text/css">
+.CodeMirror {
+    border: 1px solid grey;
+    background-color: #eee;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+    lineNumbers: true,
+    mode: 'python',
+    readOnly: true,
+});
+</script>
 {% endblock %}
