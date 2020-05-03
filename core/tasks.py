@@ -33,8 +33,10 @@ def do_a_job(run_pk, python_version, executable='python'):
     filename_code = f'jobs/{job.pk}/code.py'
     output_file = f'jobs/{job.pk}.out'
     open(filename_code, 'w').write(code)
-    job_dir = f"/home/damien/proj/python-3v4l/jobs/{job.pk}"
-    os.system(f'docker run -it --rm -v {job_dir}:/usr/src/myapp -w /usr/src/myapp {python_version} {executable} code.py > {output_file}')
+    job_dir = os.path.abspath(f"jobs/{job.pk}")
+    cmd = f'docker run -it --rm -v {job_dir}:/usr/src/myapp -w /usr/src/myapp {python_version} {executable} code.py > {output_file}'
+    print('cmd', cmd)
+    os.system(cmd)
 
     output = open(output_file).read()
     print('output', output)
