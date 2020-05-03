@@ -38,7 +38,7 @@ def do_a_job(job_pk, python_version, executable='python'):
     output_file = f'jobs/{job.pk}.out'
     open(filename_code, 'w').write(code)
     job_dir = os.path.abspath(f"jobs/{job.pk}")
-    cmd = f'docker run -it --rm -v {job_dir}:/usr/src/myapp -w /usr/src/myapp {python_version} {executable} code.py > {output_file}'
+    cmd = f'timeout 20s docker run -it --rm -v {job_dir}:/usr/src/myapp -w /usr/src/myapp {python_version} {executable} code.py > {output_file}'
     print('cmd', cmd)
     os.system(cmd)
 
