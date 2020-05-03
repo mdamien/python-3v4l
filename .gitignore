@@ -1,3 +1,4 @@
 jobs/*/*
 jobs/*.out
 db.sqlite3
+__pycache__/

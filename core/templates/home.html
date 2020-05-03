@@ -5,9 +5,26 @@
     {% csrf_token %}
     <fieldset>
       <div class="form-group">
-        <textarea class="form-control" placeholder="paste code here" name="code" rows="3">print('hello_world')</textarea>
+        <textarea id="code-editor" class="form-control" placeholder="paste code here" name="code" rows="3">print('hello_world')</textarea>
       </div>
       <button type="submit" class="btn btn-primary">Run</button>
     </fieldset>
 </form>
+{% endblock %}
+
+{% block style %}
+<style type="text/css">
+.CodeMirror {
+    border: 1px solid grey;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+    lineNumbers: true,
+    mode: 'python'
+});
+</script>
 {% endblock %}

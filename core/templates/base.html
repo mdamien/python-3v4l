@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <title>python-3v4l</title>
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'codemirror.css' %}">
+    {% block style %}{% endblock %}
   </head>
   <body>
     <div class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -35,8 +37,11 @@
 
       </footer>
 
-
     </div>
 
+    <script type="text/javascript" src="{% static 'codemirror.js' %}"></script>
+    <script type="text/javascript" src="{% static 'python.js' %}"></script>
+    {% block scripts %}{% endblock %}
+    </script>
   </body>
 </html>
