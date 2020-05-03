@@ -6,28 +6,33 @@ from celery import shared_task
 
 from .models import Job, Run
 
+versions = [
+    ('python:3.4-alpine',),
+    ('python:3.4-alpine',),
+    ('python:3.5-alpine',),
+    ('python:3.6-alpine',),
+    ('python:3.7-alpine',),
+    ('python:3.8-alpine',),
+    ('python:rc-alpine',),
+    ('pypy:3-slim', 'pypy3'),
+    ('pypy:2-slim', 'pypy'),
+]
+
+
+def launch_the_jobs(run):
+    for version in versions:
+        job = Job.objects.create(
+            run=run,
+            python_version=version[0],
+        )
+        do_a_job.delay(job.pk, *version)
+
 
 @shared_task
-def launch_the_jobs(run_pk):
-    do_a_job.delay(run_pk, 'python:3.4-alpine')
-    do_a_job.delay(run_pk, 'python:3.5-alpine')
-    do_a_job.delay(run_pk, 'python:3.6-alpine')
-    do_a_job.delay(run_pk, 'python:3.7-alpine')
-    do_a_job.delay(run_pk, 'python:3.8-alpine')
-    do_a_job.delay(run_pk, 'python:rc-alpine')
-    do_a_job.delay(run_pk, 'pypy:3-slim', 'pypy3')
-    do_a_job.delay(run_pk, 'pypy:2-slim', 'pypy')
-
-
-@shared_task
-def do_a_job(run_pk, python_version, executable='python'):
-    run = Run.objects.get(pk=run_pk)
-    code = run.code
-
-    job = Job.objects.create(
-        run=run,
-        python_version=python_version,
-    )
+def do_a_job(job_pk, python_version, executable='python'):
+    job = Job.objects.get(pk=job_pk)
+    python_version = job.python_version
+    code = job.run.code
 
     os.mkdir(f'jobs/{job.pk}')
     filename_code = f'jobs/{job.pk}/code.py'

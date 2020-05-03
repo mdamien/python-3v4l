@@ -13,7 +13,7 @@ class HomeView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        launch_the_jobs.delay(self.object.pk)
+        launch_the_jobs(self.object)
         return response
 
 class RunView(DetailView):

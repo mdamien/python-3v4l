@@ -5,7 +5,16 @@
     {% csrf_token %}
     <fieldset>
       <div class="form-group">
-        <textarea id="code-editor" class="form-control" placeholder="paste code here" name="code" rows="3">print('hello_world')</textarea>
+        <textarea id="code-editor" class="form-control" placeholder="paste code here" name="code" rows="3">class Hello:
+   def hello(self):
+      print('hello')
+
+class World(Hello):
+   def hello(self):
+      super().hello()
+      print('world')
+
+World().hello()</textarea>
       </div>
       <button type="submit" class="btn btn-primary">Run</button>
     </fieldset>
